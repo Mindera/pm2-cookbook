@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'pm2::nodejs' do
-  cached(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  cached(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
   cached(:node) { chef_run.node }
 
   it 'include the nodejs recipe' do
