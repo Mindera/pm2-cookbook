@@ -13,5 +13,5 @@ include_recipe 'pm2::nodejs'
 
 # Install pm2
 nodejs_npm 'pm2' do
-  version PM2_VERSION if !PM2_VERSION.nil?
+  version PM2_VERSION unless PM2_VERSION.nil?
 end

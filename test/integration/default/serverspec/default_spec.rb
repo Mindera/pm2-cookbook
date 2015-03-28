@@ -9,10 +9,10 @@ RSpec.configure do |c|
   end
 end
 
-%w{
+%w(
   nodejs
   npm
-}.each do |pkg|
+).each do |pkg|
   describe package(pkg) do
     it { should be_installed }
   end
