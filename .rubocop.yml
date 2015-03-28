@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+    - Guardfile
+    - 'vendor/**/*'
+    - '.kitchen/**/*'
+LineLength:
+  Max: 120
+HashSyntax:
+  EnforcedStyle: hash_rockets
+  Exclude:
+    - Rakefile
+    - 'spec/**/*'
+    - 'test/**/*'
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: false
+Style/WordArray:
+  Exclude:
+    - Rakefile
