@@ -1,5 +1,8 @@
 # PM2 Cookbook
 
+[![Cookbook](https://img.shields.io/cookbook/v/pm2.svg)](https://github.com/Mindera/pm2-cookbook/tree/0.1.0)
+[![Build Status](https://travis-ci.org/Mindera/pm2-cookbook.svg?branch=master)](https://travis-ci.org/Mindera/pm2-cookbook)
+
 Chef coookbook to install and manage [PM2](https://github.com/Unitech/pm2).
 
 ## Requirements
