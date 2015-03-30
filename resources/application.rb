@@ -16,6 +16,8 @@ actions :deploy,
         :start_or_graceful_reload,
         :delete
 
+default_action [:deploy, :start_or_restart]
+
 attribute :name,                :kind_of => String, :name_attribute => true
 attribute :script,              :kind_of => String, :required => true
 # args can be an array or a string in pm2 so we map it to a ruby Array

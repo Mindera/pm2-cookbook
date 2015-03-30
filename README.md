@@ -50,7 +50,7 @@ The `nodejs` cookbook uses the following attributes to define the `nodejs` and `
     <tr>
         <td><tt>['pm2']['nodejs']['npm]['install_method']</tt></td>
         <td>NPM install method</td>
-    </tr>    
+    </tr>
 </table>
 
 See the `nodejs` cookbook for details.
@@ -85,7 +85,7 @@ include_recipe 'pm2::default'
 
 ### pm2_application
 
-The `pm2_application` provider manages a json configuration file for a node application and controls it with PM2. 
+The `pm2_application` provider manages a json configuration file for a node application and controls it with PM2.
 
 It only start processes from a json configuration (located in `/etc/pm2/conf.d`) and it does not support starting processes by calling the PM2 CLI directly.
 
@@ -150,6 +150,8 @@ The available actions try to represent some of the PM2 CLI control [actions](htt
         <td>Invokes the PM2 CLI to stop an application and deletes the json file from the filesystem</td>
     </tr>
 </table>
+
+If no action is specified then the default action `[:deploy, start_or_restart]` will be used.
 
 #### Attributes
 

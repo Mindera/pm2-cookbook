@@ -14,5 +14,4 @@ end
 pm2_application 'test' do
   script 'test.js'
   cwd '/tmp'
-  action [:deploy, :start_or_restart]
 end
