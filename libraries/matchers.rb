@@ -27,7 +27,6 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:pm2_application, :start_or_reload, name)
   end
 
-
   def start_or_graceful_reload_pm2_application(name)
     ChefSpec::Matchers::ResourceMatcher.new(:pm2_application, :start_or_graceful_reload, name)
   end
