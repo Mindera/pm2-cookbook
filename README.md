@@ -34,33 +34,26 @@ Depends on the cookbooks:
     </tr>
 </table>
 
-### nodejs.rb
+### Up in the chain Attributes
 
-These attributes are used by the `nodejs` cookbook and override the default values.
+The `nodejs` cookbook uses the following attributes to define the `nodejs` and `npm` formats to install - override them for the desired behaviour.
 
 <table>
     <tr>
         <th>Attribute</th>
-        <th>Type</th>
         <th>Description</th>
-        <th>Options</th>
-        <th>Default</th>
     </tr>
     <tr>
-        <td><tt>['pm2']['nodejs']['install_method']</tt></td>
-        <td>String</td>
+        <td><tt>['nodejs']['install_method']</tt></td>
         <td>Nodejs install method</td>
-        <td><tt>package|source|binary</tt></td>
-        <td><tt>package</tt></td>
     </tr>
     <tr>
         <td><tt>['pm2']['nodejs']['npm]['install_method']</tt></td>
-        <td>String</td>
         <td>NPM install method</td>
-        <td><tt>embedded|source</tt></td>
-        <td><tt>embedded</tt></td>
     </tr>    
 </table>
+
+See the `nodejs` cookbook for details.
 
 ## Recipes
 
