@@ -34,7 +34,7 @@ Depends on the cookbooks:
     </tr>
 </table>
 
-### Up in the chain Attributes
+### Up the chain
 
 The `nodejs` cookbook uses the following attributes to define the `nodejs` and `npm` formats to install - override them for the desired behaviour.
 
@@ -53,7 +53,7 @@ The `nodejs` cookbook uses the following attributes to define the `nodejs` and `
     </tr>
 </table>
 
-See the `nodejs` cookbook for details.
+See the [nodejs](https://github.com/redguide/nodejs/) cookbook for details.
 
 ## Recipes
 
@@ -63,7 +63,7 @@ Installs PM2 as a global node module using a specific version if specified in th
 
 ### nodejs.rb
 
-Install `nodejs` and `npm` using the [nodejs](https://github.com/redguide/nodejs/) and overriding the default installation methods with the ones defined in the `nodejs` attributes described above.
+Install `nodejs` and `npm` using the [nodejs](https://github.com/redguide/nodejs/) cookbook.
 
 ### Example
 
