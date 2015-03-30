@@ -65,6 +65,22 @@ Installs PM2 as a global node module using a specific version if specified in th
 
 Install `nodejs` and `npm` using the [nodejs](https://github.com/redguide/nodejs/) and overriding the default installation methods with the ones defined in the `nodejs` attributes described above.
 
+### Example
+
+To install PM2:
+
+Add the `pm2` cookbook as a dependency:
+
+```ruby
+depends 'pm2'
+```
+
+Include the `pm2::default` recipe:
+
+```ruby
+include_recipe 'pm2::default'
+```
+
 ## Providers
 
 ### pm2_application
@@ -285,6 +301,24 @@ The available attributes try to represent the PM2 json definition options [schem
         <td>No</td>
     </tr>
 </table>
+
+#### Example
+
+To deploy and start (or restart) a `test.js` application that lives in `/tmp/test.js`:
+
+Install PM2 as described in the `Recipes` example above.
+
+Use the `pm2_application` provider - most basic example:
+
+```ruby
+pm2_application 'test' do
+  script 'test.js'
+  cwd '/tmp'
+  action [:deploy, :start_or_restart]
+end
+```
+
+This will deploy a `/etc/pm2/conf.d/test.json` configuration file and start/restart the application with PM2.
 
 #### References
 
