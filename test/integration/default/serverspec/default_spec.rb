@@ -21,3 +21,12 @@ end
 describe command('pm2 --version') do
   its(:exit_status) { should eq 0 }
 end
+
+describe file('/etc/pm2/conf.d/test.json') do
+  it { should be_file }
+  it { should contain 'test.js' }
+end
+
+describe command('pm2 status test') do
+  its(:stdout) { should contain 'online' }
+end

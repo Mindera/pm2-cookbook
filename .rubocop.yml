@@ -9,6 +9,7 @@ HashSyntax:
   EnforcedStyle: hash_rockets
   Exclude:
     - Rakefile
+    - Berksfile
     - 'spec/**/*'
     - 'test/**/*'
 Style/SingleSpaceBeforeFirstArg:
@@ -16,3 +17,7 @@ Style/SingleSpaceBeforeFirstArg:
 Style/WordArray:
   Exclude:
     - Rakefile
+Metrics/MethodLength:
+  Enabled: false
+Lint/Eval:
+  Enabled: false
