@@ -350,7 +350,7 @@ $ bundle exec rake unit
 
 To run lint tests (rubocop, foodcritic):
 ```bash
-$ bundle exec rake unit
+$ bundle exec rake lint
 ```
 
 To run integration tests (kitchen-ci, serverspec):
