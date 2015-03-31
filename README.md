@@ -51,7 +51,7 @@ The `nodejs` cookbook uses the following attributes to define the `nodejs` and `
         <td>Nodejs install method</td>
     </tr>
     <tr>
-        <td><tt>['pm2']['nodejs']['npm]['install_method']</tt></td>
+        <td><tt>['nodejs']['npm]['install_method']</tt></td>
         <td>NPM install method</td>
     </tr>
 </table>
