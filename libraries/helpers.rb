@@ -73,9 +73,9 @@ def pm2_graceful_reload_app(name)
   end
 end
 
-def pm2_startup
-  execute 'pm2 startup' do
-    command 'pm2 startup'
+def pm2_startup(environment)
+  execute "pm2 startup #{environment}"do
+    command "pm2 startup #{environment}"
   end
 end
 

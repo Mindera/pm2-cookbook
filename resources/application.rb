@@ -14,9 +14,10 @@ actions :deploy,
         :start_or_restart,
         :start_or_reload,
         :start_or_graceful_reload,
-        :delete
+        :delete,
+        :startup
 
-default_action [:deploy, :start_or_restart]
+default_action [:deploy, :start_or_restart, :startup]
 
 attribute :name,                :kind_of => String, :name_attribute => true
 attribute :script,              :kind_of => String, :required => true

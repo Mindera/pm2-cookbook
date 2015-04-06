@@ -118,3 +118,11 @@ action :start_or_graceful_reload do
   pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
   pm2_start_or_graceful_reload_app(pm2_config)
 end
+
+action :startup do
+  resource = @new_resource
+  Chef::Log.info "Start or gracefully reload pm2 application #{resource.name}"
+
+  # Set startup based on platform
+  pm2_startup(node['platform'])
+end

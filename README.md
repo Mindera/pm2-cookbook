@@ -152,9 +152,14 @@ The available actions try to represent some of the PM2 CLI control [actions](htt
         <td>Stop and delete an application json file</td>
         <td>Invokes the PM2 CLI to stop an application and deletes the json file from the filesystem</td>
     </tr>
+    <tr>
+        <td><tt>:startup</tt></td>
+        <td>Configures PM2 to start on boot</td>
+        <td>Invokes the PM2 CLI to configure the startup process for the running platform</td>
+    </tr>
 </table>
 
-If no action is specified then the default action `[:deploy, start_or_restart]` will be used.
+If no action is specified then the default action `[:deploy, :start_or_restart, :startup]` will be used.
 
 #### Attributes
 

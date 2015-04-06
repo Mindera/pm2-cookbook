@@ -30,3 +30,7 @@ end
 describe command('pm2 status test') do
   its(:stdout) { should contain 'online' }
 end
+
+describe command('chkconfig --list | grep 3:on | grep pm2-init.sh') do
+  its(:exit_status) { should eq 0 }
+end
