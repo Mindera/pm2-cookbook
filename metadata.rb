@@ -6,7 +6,7 @@ description      'Installs/Configures PM2'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
 
-depends 'nodejs', '~> 2.2.0'
+depends 'nodejs', '~> 2.4.0'
 
 supports 'centos', '~> 6.0'
 supports 'amazon'
