@@ -36,7 +36,7 @@ end
 
 def pm2_is_app_online?(name)
   cmd = shell_out!('pm2 list', :returns => 0)
-  not cmd.stdout.match(name).nil?
+  !cmd.stdout.match(name).nil?
 end
 
 def pm2_start_app(name, filename)
