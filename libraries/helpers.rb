@@ -42,14 +42,14 @@ end
 def pm2_start_app(name, filename)
   execute "pm2 start #{filename}" do
     command "pm2 start #{filename}"
-    not_if pm2_is_app_online?(name)
+    not_if { pm2_is_app_online?(name) }
   end
 end
 
 def pm2_stop_app(name)
   execute "pm2 stop #{name}" do
     command "pm2 stop #{name}"
-    only_if pm2_is_app_online?(name)
+    only_if { pm2_is_app_online?(name) }
   end
 end
 
@@ -62,14 +62,14 @@ end
 def pm2_reload_app(name)
   execute "pm2 reload #{name}" do
     command "pm2 reload #{name}"
-    only_if pm2_is_app_online?(name)
+    only_if { pm2_is_app_online?(name) }
   end
 end
 
 def pm2_graceful_reload_app(name)
   execute "pm2 gracefulReload #{name}" do
     command "pm2 gracefulReload #{name}"
-    only_if pm2_is_app_online?(name)
+    only_if { pm2_is_app_online?(name) }
   end
 end
 
