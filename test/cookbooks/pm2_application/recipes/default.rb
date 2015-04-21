@@ -22,6 +22,7 @@ end
 template "#{nodejs_dir}/test.js" do
   variables('port' => 8000)
   source 'test.js'
+  notifies :graceful_reload, 'pm2_application[test]', :delayed
 end
 
 template "#{nodejs_dir}/test_w_user.js" do

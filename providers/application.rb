@@ -131,7 +131,7 @@ end
 
 def pm2_app_online?
   cmd = shell_out!('pm2 list', :user => new_resource.user, :returns => 0)
-  !cmd.stdout.match(name).nil?
+  !cmd.stdout.match(new_resource.name).nil?
 end
 
 def resource_attrs
