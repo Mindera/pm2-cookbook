@@ -117,9 +117,7 @@ action :startup do
 end
 
 def pm2_config
-  return @pm2_config unless @pm2_config.nil?
-  @pm2_config = "/etc/pm2/conf.d/#{new_resource.name}.json"
-  @pm2_config
+  "/etc/pm2/conf.d/#{new_resource.name}.json"
 end
 
 def pm2_command(pm2_command)
