@@ -21,6 +21,8 @@ default_action [:deploy, :start_or_restart, :startup]
 
 attribute :name,                :kind_of => String, :name_attribute => true
 attribute :script,              :kind_of => String, :required => true
+attribute :user,                :kind_of => String, :default => 'root'
+attribute :home,                :kind_of => String
 # args can be an array or a string in pm2 so we map it to a ruby Array
 attribute :args,                :kind_of => Array
 # node_args can be an array or a string in pm2 so we map it to a ruby Array
