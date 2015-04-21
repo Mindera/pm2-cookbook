@@ -79,7 +79,7 @@ action :graceful_reload do
   Chef::Log.info "Gracefully reloading pm2 application #{new_resource.name}"
 
   # Gracefully reload pm2 application
-  pm2_command("reload #{new_resource.name}")
+  pm2_command("gracefulReload #{new_resource.name}") if pm2_app_online?
 end
 
 action :start_or_restart do
