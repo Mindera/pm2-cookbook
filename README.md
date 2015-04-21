@@ -185,6 +185,18 @@ The available attributes try to represent the PM2 json definition options [schem
         <td>Yes</td>
     </tr>
     <tr>
+        <td><tt>user</tt></td>
+        <td>String</td>
+        <td>User to execute the node process - defaults to `root`</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td><tt>home</tt></td>
+        <td>String</td>
+        <td>Value of the PM2_HOME environmental variable</td>
+        <td>No</td>
+    </tr>
+    <tr>
         <td><tt>args</tt></td>
         <td>Array</td>
         <td>See PM2 documentation for reference</td>
