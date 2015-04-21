@@ -27,7 +27,16 @@ describe file('/etc/pm2/conf.d/test.json') do
   it { should contain 'test.js' }
 end
 
+describe file('/etc/pm2/conf.d/test_w_user.json') do
+  it { should be_file }
+  it { should contain 'test_w_user.js' }
+end
+
 describe command('pm2 status test') do
+  its(:stdout) { should contain 'online' }
+end
+
+describe command('su nodeuser -c "PM2_HOME=/var/www/nodejs pm2 status test"') do
   its(:stdout) { should contain 'online' }
 end
 

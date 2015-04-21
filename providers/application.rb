@@ -8,13 +8,12 @@
 use_inline_resources
 
 action :deploy do
-  resource = @new_resource
-  Chef::Log.info "Deploying pm2 application #{resource.name}"
+  Chef::Log.info "Deploying pm2 application #{new_resource.name}"
 
   # Save resource config
   config = {}
   resource_attrs.each do |key|
-    config[key] = eval("resource.#{key}") unless eval("resource.#{key}.nil?")
+    config[key] = eval("new_resource.#{key}") unless eval("new_resource.#{key}.nil?")
   end
 
   # Make sure the pm2 config dir exist
@@ -25,7 +24,6 @@ action :deploy do
     action :create
   end
 
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
   # Deploy pm2 application json config
   template pm2_config do
     source 'application.json.erb'
@@ -37,23 +35,19 @@ action :deploy do
 end
 
 action :start do
-  resource = @new_resource
-  Chef::Log.info "Starting pm2 application #{resource.name}"
+  Chef::Log.info "Starting pm2 application #{new_resource.name}"
 
-  # Start pm2 application
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
-  pm2_start_app(resource.name, pm2_config)
+  # Start pm2 application pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
+  pm2_command("start #{pm2_config}") unless pm2_app_online?
 end
 
 action :delete do
-  resource = @new_resource
-  Chef::Log.info "Deleting pm2 application #{resource.name}"
+  Chef::Log.info "Deleting pm2 application #{new_resource.name}"
 
   # Stop pm2 application
-  pm2_stop_app(resource.name)
+  pm2_command("stop #{new_resource.name}") if pm2_app_online?
 
   # Remove pm2 application json config
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
   file pm2_config do
     action :delete
     only_if { ::File.exist?(pm2_config) }
@@ -61,68 +55,112 @@ action :delete do
 end
 
 action :stop do
-  resource = @new_resource
-  Chef::Log.info "Stopping pm2 application #{resource.name}"
+  Chef::Log.info "Stopping pm2 application #{new_resource.name}"
 
   # Stop pm2 application
-  pm2_stop_app(resource.name)
+  pm2_command("stop #{new_resource.name}") if pm2_app_online?
 end
 
 action :restart do
-  resource = @new_resource
-  Chef::Log.info "Restarting pm2 application #{resource.name}"
+  Chef::Log.info "Restarting pm2 application #{new_resource.name}"
 
   # Restart pm2 application
-  pm2_restart_app(resource.name)
+  pm2_command("restart #{new_resource.name}")
 end
 
 action :reload do
-  resource = @new_resource
-  Chef::Log.info "Reloading pm2 application #{resource.name}"
+  Chef::Log.info "Reloading pm2 application #{new_resource.name}"
 
   # Reload pm2 application
-  pm2_reload_app(resource.name)
+  pm2_command("reload #{new_resource.name}")
 end
 
 action :graceful_reload do
-  resource = @new_resource
-  Chef::Log.info "Gracefully reloading pm2 application #{resource.name}"
+  Chef::Log.info "Gracefully reloading pm2 application #{new_resource.name}"
 
   # Gracefully reload pm2 application
-  pm2_graceful_reload_app(resource.name)
+  pm2_command("reload #{new_resource.name}")
 end
 
 action :start_or_restart do
-  resource = @new_resource
-  Chef::Log.info "Start or restart pm2 application #{resource.name}"
+  Chef::Log.info "Start or restart pm2 application #{new_resource.name}"
 
   # Start or restart pm2 application
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
-  pm2_start_or_restart_app(pm2_config)
+  pm2_command("startOrRestart #{pm2_config}")
 end
 
 action :start_or_reload do
-  resource = @new_resource
-  Chef::Log.info "Start or reload pm2 application #{resource.name}"
+  Chef::Log.info "Start or reload pm2 application #{new_resource.name}"
 
   # Start or reload pm2 application
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
-  pm2_start_or_reload_app(pm2_config)
+  pm2_command("startOrReload #{pm2_config}")
 end
 
 action :start_or_graceful_reload do
-  resource = @new_resource
-  Chef::Log.info "Start or gracefully reload pm2 application #{resource.name}"
+  Chef::Log.info "Start or gracefully reload pm2 application #{new_resource.name}"
 
   # Start or gracefully reload pm2 application
-  pm2_config = "/etc/pm2/conf.d/#{resource.name}.json"
-  pm2_start_or_graceful_reload_app(pm2_config)
+  pm2_command("startOrGracefulReload #{pm2_config}")
 end
 
 action :startup do
-  resource = @new_resource
-  Chef::Log.info "Start or gracefully reload pm2 application #{resource.name}"
+  Chef::Log.info "Start or gracefully reload pm2 application #{new_resource.name}"
 
   # Set startup based on platform
-  pm2_startup(node['platform'])
+  cmd = "pm2 startup #{node['platform']}"
+  # Add the user option if doing it as a different user
+  cmd << " -u #{new_resource.user}"
+  execute cmd do
+    environment('PM2_HOME' => new_resource.home) unless new_resource.home.nil?
+    command cmd
+  end
+end
+
+def pm2_config
+  return @pm2_config unless @pm2_config.nil?
+  @pm2_config = "/etc/pm2/conf.d/#{new_resource.name}.json"
+  @pm2_config
+end
+
+def pm2_command(pm2_command)
+  cmd = "pm2 #{pm2_command}"
+  execute cmd do
+    command cmd
+    user new_resource.user
+    environment('PM2_HOME' => new_resource.home) unless new_resource.home.nil?
+  end
+end
+
+def pm2_app_online?
+  cmd = shell_out!('pm2 list', :user => new_resouce.user, :returns => 0)
+  !cmd.stdout.match(name).nil?
+end
+
+def resource_attrs
+  %w(
+    name
+    script
+    args
+    env
+    node_args
+    max_memory_restart
+    instances
+    log_file
+    error_file
+    out_file
+    pid_file
+    cron_restart
+    cwd
+    merge_logs
+    watch
+    ignore_watch
+    watch_options
+    log_data_format
+    min_uptime
+    max_restarts
+    exec_mode
+    exec_interpreter
+    write
+    force
+  )
 end
