@@ -130,7 +130,10 @@ def pm2_command(pm2_command)
 end
 
 def pm2_app_online?
-  cmd = shell_out!('pm2 list', :user => new_resource.user, :returns => 0)
+  cmd = shell_out!('pm2 list',
+                   :user => new_resource.user,
+                   :environment => {'PM2_HOME' => new_resource.home},
+                   :returns => 0)
   !cmd.stdout.match(new_resource.name).nil?
 end
 
