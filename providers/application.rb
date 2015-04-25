@@ -111,7 +111,7 @@ action :startup do
   # Add the user option if doing it as a different user
   cmd << " -u #{new_resource.user}"
   execute cmd do
-    environment('PM2_HOME' => new_resource.home) unless new_resource.home.nil?
+    environment pm2_environment
     command cmd
   end
 end
@@ -125,16 +125,24 @@ def pm2_command(pm2_command)
   execute cmd do
     command cmd
     user new_resource.user
-    environment('PM2_HOME' => new_resource.home) unless new_resource.home.nil?
+    environment pm2_environment
   end
 end
 
 def pm2_app_online?
   cmd = shell_out!('pm2 list',
                    :user => new_resource.user,
-                   :environment => { 'PM2_HOME' => new_resource.home },
-                   :returns => 0)
+                   :returns => 0,
+                   :environment => pm2_environment)
   !cmd.stdout.match(new_resource.name).nil?
+end
+
+def pm2_environment
+  if new_resource.home.nil?
+    return {}
+  else
+    return { 'PM2_HOME' => new_resource.home }
+  end
 end
 
 def resource_attrs
