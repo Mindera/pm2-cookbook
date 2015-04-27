@@ -138,11 +138,11 @@ def pm2_app_online?
 end
 
 def pm2_environment
-  if new_resource.home.nil?
-    return {}
-  else
-    return { 'PM2_HOME' => new_resource.home }
-  end
+  # We can only support setting the home when PM2 is able to handle it properly:
+  # https://github.com/Unitech/PM2/pull/1213
+  # pm2_home = new_resource.home.nil? ? "#{::Dir.home(new_resource.user)}/.pm2" : new_resource.home
+  pm2_home = "#{::Dir.home(new_resource.user)}/.pm2"
+  { 'PM2_HOME' => pm2_home }
 end
 
 def resource_attrs
