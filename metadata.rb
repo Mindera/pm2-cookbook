@@ -4,7 +4,7 @@ maintainer_email 'miguel.fonseca@mindera.com'
 license          'MIT'
 description      'Installs/Configures PM2'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.3'
+version          '0.4.0'
 
 depends 'nodejs', '~> 2.4.0'
 
