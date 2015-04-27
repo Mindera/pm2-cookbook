@@ -193,7 +193,7 @@ The available attributes try to represent the PM2 json definition options [schem
     <tr>
         <td><tt>home</tt></td>
         <td>String</td>
-        <td>Value of the PM2_HOME environmental variable - Note: PM2 does not support PM2_HOME properly at this point - so we always override to `#{::Dir.home(user)}/.pm2`</td>
+        <td>Value of the PM2_HOME environmental variable - Note: PM2 does not support PM2_HOME properly at this point - so we always override to the .pm2 dir under the user home</td>
         <td>No</td>
     </tr>
     <tr>
