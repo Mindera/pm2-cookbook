@@ -36,10 +36,15 @@ describe command('pm2 status test') do
   its(:stdout) { should contain 'online' }
 end
 
-describe command('su nodeuser -c "PM2_HOME=/var/www/nodejs pm2 status test"') do
+describe command('su nodeuser -c "PM2_HOME=/home/nodeuser/.pm2 pm2 status test_w_user"') do
   its(:stdout) { should contain 'online' }
 end
 
 describe command('chkconfig --list | grep 3:on | grep pm2-init.sh') do
   its(:exit_status) { should eq 0 }
+end
+
+describe file('/etc/init.d/pm2-init.sh') do
+  it { should be_file }
+  it { should contain 'export PM2_HOME="/home/nodeuser/.pm2"' }
 end

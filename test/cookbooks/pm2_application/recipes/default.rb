@@ -7,16 +7,11 @@
 
 include_recipe 'pm2::default'
 
+nodejs_dir = '/home/nodeuser'
 user 'nodeuser' do
+  home nodejs_dir
+  manage_home true
   action :create
-end
-
-nodejs_dir = '/var/www/nodejs'
-directory '/var/www/nodejs' do
-  action :create
-  recursive true
-  owner 'nodeuser'
-  group 'nodeuser'
 end
 
 template "#{nodejs_dir}/test.js" do
@@ -30,16 +25,16 @@ template "#{nodejs_dir}/test_w_user.js" do
   source 'test.js'
 end
 
+pm2_application 'test' do
+  script 'test.js'
+  cwd nodejs_dir
+  action [:deploy, :start_or_reload, :startup]
+end
+
 pm2_application 'test_w_user' do
   script 'test_w_user.js'
   cwd nodejs_dir
   user 'nodeuser'
   home nodejs_dir
-  action [:deploy, :start_or_reload, :startup]
-end
-
-pm2_application 'test' do
-  script 'test.js'
-  cwd nodejs_dir
   action [:deploy, :start_or_reload, :startup]
 end
