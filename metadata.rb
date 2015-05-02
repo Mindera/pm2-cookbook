@@ -9,6 +9,7 @@ version          '0.4.0'
 depends 'nodejs', '~> 2.4.0'
 
 supports 'centos', '~> 6.0'
+supports 'redhat', '~> 6.0'
 supports 'ubuntu', '~> 14.0'
 supports 'debian', '~> 7.8'
 supports 'amazon'
