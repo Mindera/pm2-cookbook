@@ -9,10 +9,6 @@ RSpec.configure do |c|
   end
 end
 
-describe command('whoami') do
-    its(:stdout) { should contain 'root' }
-end
-
 describe package('nodejs') do
   it { should be_installed }
 end
