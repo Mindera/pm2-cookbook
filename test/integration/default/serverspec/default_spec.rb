@@ -9,13 +9,16 @@ RSpec.configure do |c|
   end
 end
 
-%w(
-  nodejs
-  npm
-).each do |pkg|
-  describe package(pkg) do
-    it { should be_installed }
-  end
+describe command('whoami') do
+    its(:stdout) { should contain 'root' }
+end
+
+describe package('nodejs') do
+  it { should be_installed }
+end
+
+describe command('npm --version') do
+  its(:exit_status) { should eq 0 }
 end
 
 describe command('pm2 --version') do
@@ -32,7 +35,7 @@ describe file('/etc/pm2/conf.d/test_w_user.json') do
   it { should contain 'test_w_user.js' }
 end
 
-describe command('pm2 status test') do
+describe command('su root -c "PM2_HOME=/root/.pm2 pm2 status test"') do
   its(:stdout) { should contain 'online' }
 end
 
@@ -40,7 +43,7 @@ describe command('su nodeuser -c "PM2_HOME=/home/nodeuser/.pm2 pm2 status test_w
   its(:stdout) { should contain 'online' }
 end
 
-describe command('chkconfig --list | grep 3:on | grep pm2-init.sh') do
+describe command('ls /etc/rc3.d/S*pm2-init.sh') do
   its(:exit_status) { should eq 0 }
 end
 
