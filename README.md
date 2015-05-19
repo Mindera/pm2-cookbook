@@ -15,6 +15,8 @@ Depends on the cookbooks:
 
  * Centos 6+
  * Amazon Linux
+ * Ubuntu 14+
+ * Debian 7+
 
 ## Attributes
 
