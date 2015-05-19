@@ -377,5 +377,5 @@ $ bundle exec rake lint
 
 To run integration tests (kitchen-ci, serverspec):
 ```bash
-$ bundle exec rake integration:vagrant
+$ bundle exec rake integration
 ```
