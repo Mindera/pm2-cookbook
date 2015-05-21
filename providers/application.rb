@@ -107,7 +107,7 @@ action :startup do
   Chef::Log.info "Start or gracefully reload pm2 application #{new_resource.name}"
 
   # Set startup based on platform
-  cmd = "pm2 startup #{node['platform']}"
+  cmd = "PM2_HOME=#{pm2_home} pm2 startup #{node['platform']}"
   # Add the user option if doing it as a different user
   cmd << " -u #{new_resource.user}"
   execute cmd do
@@ -121,7 +121,7 @@ def pm2_config
 end
 
 def pm2_command(pm2_command)
-  cmd = "pm2 #{pm2_command}"
+  cmd = "PM2_HOME=#{pm2_home} pm2 #{pm2_command}"
   execute cmd do
     command cmd
     user new_resource.user
@@ -130,18 +130,22 @@ def pm2_command(pm2_command)
 end
 
 def pm2_app_online?
-  cmd = shell_out!('pm2 list',
+  cmd = shell_out!("PM2_HOME=#{pm2_home} pm2 list",
                    :user => new_resource.user,
                    :returns => 0,
                    :environment => pm2_environment)
   !cmd.stdout.match(new_resource.name).nil?
 end
 
+def pm2_home
+  if new_resource.home.nil?
+    return "#{::Dir.home(new_resource.user)}/.pm2"
+  else
+    return new_resource.home
+  end
+end
+
 def pm2_environment
-  # We can only support setting the home when PM2 is able to handle it properly:
-  # https://github.com/Unitech/PM2/pull/1213
-  # pm2_home = new_resource.home.nil? ? "#{::Dir.home(new_resource.user)}/.pm2" : new_resource.home
-  pm2_home = "#{::Dir.home(new_resource.user)}/.pm2"
   { 'PM2_HOME' => pm2_home }
 end
 
