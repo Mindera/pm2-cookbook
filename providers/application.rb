@@ -141,7 +141,7 @@ def pm2_home
   if new_resource.home.nil?
     "#{::Dir.home(new_resource.user)}/.pm2"
   else
-    if %r{/\.pm2(/)*$}.match(new_resource.home)
+    if %r{/\.pm2/*$}.match(new_resource.home)
       new_resource.home
     else
       "#{new_resource.home}/.pm2"
