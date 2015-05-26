@@ -31,11 +31,23 @@ describe file('/etc/pm2/conf.d/test_w_user.json') do
   it { should contain 'test_w_user.js' }
 end
 
-describe command('su root -c "PM2_HOME=/root/.pm2 pm2 status test"') do
+describe file('/home/nodeuser/.pm2') do
+  it { should be_directory }
+end
+
+describe file('/home/nodeuserwithpm2home/.pm2/pm2.pid') do
+  it { should be_file }
+end
+
+describe command('su root -c "pm2 status test"') do
   its(:stdout) { should contain 'online' }
 end
 
-describe command('su nodeuser -c "PM2_HOME=/home/nodeuser/.pm2 pm2 status test_w_user"') do
+describe command('su nodeuser -c "pm2 status test_w_user"') do
+  its(:stdout) { should contain 'online' }
+end
+
+describe command('su nodeuserwithpm2home -c "pm2 status test_w_user_w_pm2_home"') do
   its(:stdout) { should contain 'online' }
 end
 
