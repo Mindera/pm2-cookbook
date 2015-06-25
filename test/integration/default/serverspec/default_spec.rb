@@ -39,15 +39,15 @@ describe file('/home/nodeuserwithpm2home/.pm2/pm2.pid') do
   it { should be_file }
 end
 
-describe command('su root -c "pm2 status test"') do
+describe command('su root -c "pm2 info test"') do
   its(:stdout) { should contain 'online' }
 end
 
-describe command('su nodeuser -c "pm2 status test_w_user"') do
+describe command('su nodeuser -c "pm2 info test_w_user"') do
   its(:stdout) { should contain 'online' }
 end
 
-describe command('su nodeuserwithpm2home -c "pm2 status test_w_user_w_pm2_home"') do
+describe command('su nodeuserwithpm2home -c "pm2 info test_w_user_w_pm2_home"') do
   its(:stdout) { should contain 'online' }
 end
 
