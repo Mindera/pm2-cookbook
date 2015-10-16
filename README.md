@@ -120,7 +120,7 @@ The available actions try to represent some of the PM2 CLI control [actions](htt
         <td>Invokes the PM2 CLI to stop an application by name</td>
     </tr>
     <tr>
-        <td><tt>:stop</tt></td>
+        <td><tt>:restart</tt></td>
         <td>Restart an application</td>
         <td>Invokes the PM2 CLI to restart an application by name only if it is running</td>
     </tr>
