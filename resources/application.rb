@@ -44,7 +44,7 @@ attribute :ignore_watch,        :kind_of => Array
 attribute :watch_options,       :kind_of => Hash
 # env is a js object or string in pm2 so we map it to a ruby Hash
 attribute :env,                 :kind_of => Hash
-attribute :log_data_format,     :kind_of => String
+attribute :log_date_format,     :kind_of => String
 # min_uptime is a string or number in pm2 so we map it to a ruby String
 attribute :min_uptime,          :kind_of => String
 attribute :max_restarts,        :kind_of => Integer

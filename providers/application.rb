@@ -172,7 +172,7 @@ def resource_attrs
     watch
     ignore_watch
     watch_options
-    log_data_format
+    log_date_format
     min_uptime
     max_restarts
     exec_mode
