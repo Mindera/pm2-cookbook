@@ -37,7 +37,7 @@ attribute :pid_file,            :kind_of => String
 attribute :cron_restart,        :kind_of => String
 attribute :cwd,                 :kind_of => String, :required => true
 attribute :merge_logs,          :kind_of => [TrueClass, FalseClass]
-attribute :watch,               :kind_of => [TrueClass, FalseClass]
+attribute :watch,               :kind_of => [TrueClass, FalseClass, Array]
 # ignore_watch can be an array or string in pm2 so we map it to a ruby Array
 attribute :ignore_watch,        :kind_of => Array
 # watch_options a js object in pm2 so we map it to a ruby Hash
