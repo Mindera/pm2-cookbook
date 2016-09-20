@@ -9,8 +9,8 @@ RSpec.configure do |c|
   end
 end
 
-describe package('nodejs') do
-  it { should be_installed }
+describe command('node --version') do
+  its(:exit_status) { should eq 0 }
 end
 
 describe command('npm --version') do
