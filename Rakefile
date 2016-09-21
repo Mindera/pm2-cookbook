@@ -37,4 +37,4 @@ task integration: ['integration:kitchen:vagrant']
 task travis: ['lint']
 
 # Default
-task default: ['lint', 'unit', 'integration']
+task default: ['lint', 'integration']
