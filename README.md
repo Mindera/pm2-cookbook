@@ -350,11 +350,6 @@ $ bundle install
 
 ### Tests
 
-To run unit tests (chefspec):
-```bash
-$ bundle exec rake unit
-```
-
 To run lint tests (rubocop, foodcritic):
 ```bash
 $ bundle exec rake lint

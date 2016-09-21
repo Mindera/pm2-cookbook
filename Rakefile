@@ -14,12 +14,6 @@ namespace :lint do
   end
 end
 
-# ChefSpec
-namespace :unit do
-  desc 'Run ChefSpec examples'
-  RSpec::Core::RakeTask.new(:chefspec)
-end
-
 # Kitchen
 namespace :integration do
   namespace :kitchen do
@@ -33,9 +27,6 @@ namespace :integration do
   end
 end
 
-desc 'Run Unit tests'
-task unit: ['unit:chefspec']
-
 desc 'Run Lint tests'
 task lint: ['lint:rubocop', 'lint:foodcritic']
 
@@ -43,7 +34,7 @@ desc 'Run Integration tests'
 task integration: ['integration:kitchen:vagrant']
 
 # Travis
-task travis: ['lint', 'unit']
+task travis: ['lint']
 
 # Default
 task default: ['lint', 'unit', 'integration']
