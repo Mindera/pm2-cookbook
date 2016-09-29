@@ -8,14 +8,13 @@ group :development do
   gem 'guard-rubocop'
 end
 
+group :common do
+  gem 'rspec', '~> 3.4'
+end
+
 group :lint do
   gem 'foodcritic', '~> 4.0'
   gem 'rubocop', '~> 0.29.0'
-end
-
-group :unit do
-  gem 'berkshelf', '~> 4.0.0'
-  gem 'chefspec', '~> 4.0.0'
 end
 
 group :kitchen_common do

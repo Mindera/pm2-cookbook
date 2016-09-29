@@ -6,12 +6,23 @@
 #
 
 # Constants
-PM2_VERSION = node['pm2']['version']
+NODE_VERSION = node['pm2']['node_version']
 
-# Install npm
-include_recipe 'pm2::nodejs'
+# Install node
+javascript_runtime 'node' do
+  version NODE_VERSION
+end
 
-# Install pm2
-nodejs_npm 'pm2' do
-  version PM2_VERSION unless PM2_VERSION.nil?
+# Install node packages
+%w(pm2 npm).each do |pkg|
+  node_package pkg do
+    version node['pm2']["#{pkg}_version"] unless node['pm2']["#{pkg}_version"].nil?
+  end
+end
+
+# Link executable into system path
+%w(node pm2 npm).each do |exe|
+  link "/usr/bin/#{exe}" do
+    to "/opt/nodejs-#{node['pm2']['node_version']}/bin/#{exe}"
+  end
 end

@@ -9,7 +9,7 @@ Chef coookbook to install and manage [PM2](https://github.com/Unitech/pm2).
 
 Depends on the cookbooks:
 
- * [nodejs](https://github.com/redguide/nodejs/)
+ * [poise-javascript](https://github.com/poise/poise-javascript)
 
 ## Platforms
 
@@ -27,48 +27,33 @@ Depends on the cookbooks:
         <th>Attribute</th>
         <th>Type</th>
         <th>Description</th>
-        <th>Options</th>
         <th>Default</th>
     </tr>
     <tr>
-        <td><tt>['pm2']['version']</tt></td>
+        <td><tt>['pm2']['node_version']</tt></td>
+        <td>String</td>
+        <td>Node version to install</td>
+        <td><tt>4.5.0</tt></td>
+    </tr>
+    <tr>
+        <td><tt>['pm2']['pm2_version']</tt></td>
         <td>String</td>
         <td>PM2 node module version to install</td>
-        <td>-</td>
+        <td><tt>latest</tt></td>
+    </tr>
+    <tr>
+        <td><tt>['pm2']['npm_version']</tt></td>
+        <td>String</td>
+        <td>NPM node module version to install</td>
         <td><tt>latest</tt></td>
     </tr>
 </table>
-
-### Up the chain
-
-The `nodejs` cookbook uses the following attributes to define the `nodejs` and `npm` formats to install - override them for the desired behaviour.
-
-<table>
-    <tr>
-        <th>Attribute</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td><tt>['nodejs']['install_method']</tt></td>
-        <td>Nodejs install method</td>
-    </tr>
-    <tr>
-        <td><tt>['nodejs']['npm]['install_method']</tt></td>
-        <td>NPM install method</td>
-    </tr>
-</table>
-
-See the [nodejs](https://github.com/redguide/nodejs/) cookbook for details.
 
 ## Recipes
 
 ### default.rb
 
 Installs PM2 as a global node module using a specific version if specified in the `default` attributes described above.
-
-### nodejs.rb
-
-Install `nodejs` and `npm` using the [nodejs](https://github.com/redguide/nodejs/) cookbook.
 
 ### Example
 
@@ -364,11 +349,6 @@ $ bundle install
 ```
 
 ### Tests
-
-To run unit tests (chefspec):
-```bash
-$ bundle exec rake unit
-```
 
 To run lint tests (rubocop, foodcritic):
 ```bash
