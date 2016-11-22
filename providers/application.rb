@@ -116,7 +116,7 @@ action :startup do
   end
 
   # Save running processes
-  cmd = "pm2 save"
+  cmd = 'pm2 save'
   execute cmd do
     environment pm2_environment
     command cmd
