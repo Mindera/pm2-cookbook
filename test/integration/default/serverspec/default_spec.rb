@@ -59,3 +59,7 @@ describe file('/etc/init.d/pm2-init.sh') do
   it { should be_file }
   it { should contain 'export PM2_HOME="/home/nodeuser/.pm2"' }
 end
+
+describe file('/home/nodeuser/.pm2/dump.pm2') do
+  it { should be_file }
+end

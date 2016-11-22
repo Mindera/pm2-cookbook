@@ -6,6 +6,7 @@ group :development do
   gem 'guard', '~> 2.12.0'
   gem 'guard-rspec'
   gem 'guard-rubocop'
+  gem 'berkshelf'
 end
 
 group :common do

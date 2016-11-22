@@ -114,6 +114,13 @@ action :startup do
     environment pm2_environment
     command cmd
   end
+
+  # Save running processes
+  cmd = "pm2 save"
+  execute cmd do
+    environment pm2_environment
+    command cmd
+  end
 end
 
 def pm2_config
