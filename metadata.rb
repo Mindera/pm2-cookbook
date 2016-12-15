@@ -6,7 +6,7 @@ description      'Installs/Configures PM2'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.7.1'
 
-depends 'poise-javascript', '~> 1.1.0'
+depends 'poise-javascript', '~> 1.1.1'
 
 supports 'centos', '~> 6.0'
 supports 'redhat', '~> 6.0'
