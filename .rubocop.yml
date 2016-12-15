@@ -12,7 +12,7 @@ HashSyntax:
     - Berksfile
     - 'spec/**/*'
     - 'test/**/*'
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
 Style/WordArray:
   Exclude:
