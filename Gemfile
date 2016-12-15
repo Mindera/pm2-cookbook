@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :development do
-  gem 'rake'
+  gem 'rake', '< 11.0'
   gem 'rb-fsevent'
   gem 'guard', '~> 2.12.0'
   gem 'guard-rspec'

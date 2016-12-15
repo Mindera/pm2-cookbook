@@ -10,7 +10,7 @@ namespace :lint do
 
   desc 'Run Foodcritic checks'
   FoodCritic::Rake::LintTask.new(:foodcritic) do |task|
-    task.options = {  fail_tags: ['any'], tags: []  }
+    task.options = { fail_tags: ['any'], tags: [] }
   end
 end
 

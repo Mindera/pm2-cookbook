@@ -54,6 +54,7 @@ bin/*
 /cookbooks
 .kitchen/
 .kitchen.local.yml
+vendor/*
 
 # Berks
 Berksfile.lock
