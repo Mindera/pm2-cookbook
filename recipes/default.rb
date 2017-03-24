@@ -18,11 +18,11 @@ end
   node_package pkg do
     version node['pm2']["#{pkg}_version"] unless node['pm2']["#{pkg}_version"].nil?
   end
-end
+end if node['pm2']['manage_pm2']
 
 # Link executable into system path
 %w(node pm2 npm).each do |exe|
   link "/usr/bin/#{exe}" do
     to "/opt/nodejs-#{node['pm2']['node_version']}/bin/#{exe}"
   end
-end
+end if node['pm2']['manage_pm2']
