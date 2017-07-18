@@ -268,7 +268,7 @@ The available attributes try to represent the PM2 json definition options [schem
         <td>No</td>
     </tr>
     <tr>
-        <td><tt>log_data_format</tt></td>
+        <td><tt>log_date_format</tt></td>
         <td>String</td>
         <td>See PM2 documentation for reference</td>
         <td>No</td>
