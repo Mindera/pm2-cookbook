@@ -29,8 +29,10 @@ action :deploy do
     source 'application.json.erb'
     variables(:config => config)
     cookbook 'pm2'
-    mode '0644'
+    mode '0600'
     backup false
+    sensitive true
+    owner new_resource.user
   end
 end
 
